@@ -15,7 +15,7 @@ const Hero = () => {
                       Goverment Health Services Portal
                     </span>
                   </h1>
-                  <p className="mx-auto text-center text-base text-gray-500 sm:max-w-md lg:text-xl md:max-w-3xl">
+                  <p className="mx-auto  text-base text-gray-500 sm:max-w-md lg:text-xl md:max-w-3xl">
                     Your digital gateway to comprehensive healthcare
                     information, services, and resources, ensuring access to
                     quality care for all citizens.
