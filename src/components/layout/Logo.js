@@ -1,10 +1,11 @@
-import {SiDeepnote} from 'react-icons/si/'
+import { FaHandHoldingMedical } from "react-icons/fa";
+
 
 const Logo = () => {
   return (
-    <h1 className='flex items-center text-2xl font-bold gap-2 text-blue-500'>
-      <SiDeepnote className='h-5 w-5'/>
-      DeSIDB
+    <h1 className='flex items-center gap-2 text-2xl font-bold text-blue-500'>
+      <FaHandHoldingMedical className='w-5 h-5'/>
+      GovHSP
     </h1>
   )  
 }

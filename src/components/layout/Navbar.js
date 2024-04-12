@@ -1,30 +1,28 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
-import AdminDropdown from './AdminDropdown'
-import BrowseDropdown from './BrowseDropdown'
-import ConnectWallet from './ConnectWallet'
+import Doctors from './Doctors.js'
+import Hospitals from './Hospitals.js'
+import Login from './Login.js'
 import Logo from './Logo'
-import MiscDropdown from './MiscDropdown'
-import RegisterDropdown from './RegisterDropdown'
+import AwareDropdown from './AwareDropdown'
+import AvailabilityDropdown from './AvailabilityDropdown'
 
-const Navbar = () => {
-  
-  return (
-    <header className='z-50 px-6 py-4 bg-white'>
-      <nav className='flex items-center justify-between'>
-        <Link to='/'>
-        <Logo/>
-        </Link>
-        <div className='flex items-center gap-4'>
-          <RegisterDropdown/>
-          <BrowseDropdown/>
-          <MiscDropdown/>
-          <AdminDropdown />
-          <ConnectWallet/>
-        </div>
-      </nav>
-    </header>
-  )
-}
+const Navbar = () => (
+  <header className='z-50 px-6 py-4 bg-white'>
+    <nav className='flex items-center justify-between'>
+      <Link to='/'>
+        <Logo />
+      </Link>
+      <div className='flex items-center gap-4'>
+
+        <Hospitals />
+        <Doctors />
+        <AvailabilityDropdown />
+        <AwareDropdown />
+        <Login />
+      </div>
+    </nav>
+  </header>
+)
 
 export default Navbar

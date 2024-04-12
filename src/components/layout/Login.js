@@ -9,7 +9,7 @@ export const shortenAddress = (address) => {
 };
 
 
-const ConnectWallet = () => {
+const Login = () => {
   const [isAdmin,setIsAdmin] = useState(false);
   const {data:account} = useAccount();
   const {data:signer} = useSigner();
@@ -45,19 +45,19 @@ const ConnectWallet = () => {
   
   if(isAdmin){
     return (
-      <div className='bg-green-50 inline-flex items-center gap-1 text-green-500  font-medium px-4 py-2 rounded cursor-pointer'>{shortenAddress(account.address)} <span>{<HiCheckCircle className='h-5 w-5'/>}</span></div> 
+      <div className='inline-flex items-center gap-1 px-4 py-2 font-medium text-green-500 rounded cursor-pointer bg-green-50'>{shortenAddress(account.address)} <span>{<HiCheckCircle className='w-5 h-5'/>}</span></div> 
     );
   }
 
   if(account) {
     return(
-      <div className='bg-blue-50 text-blue-500 font-medium px-4 py-2 rounded cursor-pointer'>{shortenAddress(account.address)}</div>
+      <div className='px-4 py-2 font-medium text-blue-500 rounded cursor-pointer bg-blue-50'>{shortenAddress(account.address)}</div>
     )
   }
  
   return (
-    <button onClick={connect} className='primary-btn'>Connect Wallet</button>
+    <button onClick={connect} className='primary-btn'>Login</button>
   )
 }
 
-export default ConnectWallet;
+export default Login;
