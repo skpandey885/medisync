@@ -7,7 +7,7 @@ import Loader from '../../components/Loader';
 import axios from 'axios'
 
 const VerifyStudents = () => {
-    const [loading, setLoading] = useState(true);
+    const [loading, setLoading] = useState(false);
     const [filterBy, setFilterBy] = useState('name')
     const [isAdmin, setIsAdmin] = useState(false);
     const [allStudents, setAllStudents] = useState([]);
@@ -59,7 +59,7 @@ const VerifyStudents = () => {
     }
 
     if (!isAdmin) {
-        return <div className='h-[90vh] w-screen flex items-center justify-center'>You do not have the permission to verify students, Please contact an admin</div>
+        return <div className='h-[90vh] w-screen flex items-center justify-center'>Feature in progress!</div>
     }
 
     return (

@@ -41,7 +41,7 @@ root.render(
       <Route path='/' element={<App />} />
       <Route path='/browse/doctors' element={<BrowseStudentPage />} />
       <Route path='/browse/hospitals' element={<BrowseCollegesPage />} />
-      <Route path='/browse/verify' element={<VerifyStudents />} />
+      <Route path='/availability/medicine-inventory' element={<VerifyStudents />} />
       <Route path='/register/student' element={<RegisterStudentPage />} />
       <Route path='/register/college' element={<RegisterCollegePage />} />
       <Route path='/register/college' element={<RegisterCollegePage />} />  

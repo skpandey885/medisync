@@ -27,7 +27,7 @@ export default function AvailabilityDropdown() {
           <Menu.Items className="absolute right-0 z-50 w-40 mt-2 origin-top-left bg-white rounded shadow-lg ring-1 ring-gray-200">
             <div className="flex flex-col p-1 i">
               <Menu.Item>
-                  <Link className='px-4 py-2 duration-100 rounded hover:bg-gray-100' to='/availability//medicine-inventory'>
+                  <Link className='px-4 py-2 duration-100 rounded hover:bg-gray-100' to='/availability/medicine-inventory'>
                     Medicines
                   </Link>
 

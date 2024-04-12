@@ -35,7 +35,7 @@ const level = [
 ]
 
 const VerifyStudentDetail = () => {
-  const [state, setState] = useState();
+  const [state, setState] = useState(true);
   const [date, setDate] = useState();
   const [data, setData] = useState();
   const {register,handleSubmit,setValue} = useForm()
