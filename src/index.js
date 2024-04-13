@@ -23,7 +23,7 @@ import Verifycard from './components/Verifycard';
 import AddAdminPage from './pages/browse/AddAdminPage';
 import UpdateStudentDetail from './pages/UpdateStudentDetail';
 import HealthcareInitiatives from './pages/others/HealthcareInitiatives';
-import CommunityPrograms from './pages/others/CommunityPrograms';
+import HealthcareConferences from './pages/others/HealthcareConferences';
 
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
@@ -45,8 +45,8 @@ root.render(
       <Route path='/register/student' element={<RegisterStudentPage />} />
       <Route path='/register/college' element={<RegisterCollegePage />} />
       <Route path='/register/college' element={<RegisterCollegePage />} />  
-      <Route path='/others/healthcare-initiatives' element={<HealthcareInitiatives />} />
-      <Route path='/others/community-programs' element={<CommunityPrograms />} />
+      <Route path='/others/healthcare/initiatives' element={<HealthcareInitiatives />} />
+      <Route path='/others/healthcare/conferences' element={<HealthcareConferences />} />
 
       <Route path='/browse/add-admin' element={<AddAdminPage />} />
 
