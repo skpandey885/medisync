@@ -27,13 +27,13 @@ Aware
           <Menu.Items className="absolute right-0 z-50 w-56 mt-2 origin-top-left bg-white rounded shadow-lg ring-1 ring-gray-200">
             <div className="flex flex-col p-1 i">
               <Menu.Item>
-                  <Link className='px-4 py-2 duration-100 rounded hover:bg-gray-100' to='/others/fellowships'>
+                  <Link className='px-4 py-2 duration-100 rounded hover:bg-gray-100' to='/others/healthcare-initiatives'>
                     Healthcare Initiatives
                   </Link>
 
               </Menu.Item>
               <Menu.Item>
-              <Link className='px-4 py-2 duration-100 rounded hover:bg-gray-100' to='/others/training'>
+              <Link className='px-4 py-2 duration-100 rounded hover:bg-gray-100' to='/others/community-programs'>
               Community Programs
                   </Link>
               </Menu.Item>

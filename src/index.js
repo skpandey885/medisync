@@ -10,12 +10,10 @@ import RegisterCollegePage from './pages/register/RegisterCollegePage';
 import RegisterStudentPage from './pages/register/RegisterStudentPage';
 import Navbar from './components/layout/Navbar';
 import Footer from './components/layout/Footer';
-import Fellowship from './pages/others/Fellowship';
 import About from './pages/About';
 import { createClient, WagmiConfig } from 'wagmi';
 import {Toaster} from "react-hot-toast";
 
-import Training from './pages/others/Training';
 import VerifyStudentDetail from './pages/VerifyStudentDetail'
 import StudentDetail from './pages/StudentDetail';
 import Contact from './pages/Contact';
@@ -24,6 +22,8 @@ import Verifycard from './components/Verifycard';
 
 import AddAdminPage from './pages/browse/AddAdminPage';
 import UpdateStudentDetail from './pages/UpdateStudentDetail';
+import HealthcareInitiatives from './pages/others/HealthcareInitiatives';
+import CommunityPrograms from './pages/others/CommunityPrograms';
 
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
@@ -45,8 +45,8 @@ root.render(
       <Route path='/register/student' element={<RegisterStudentPage />} />
       <Route path='/register/college' element={<RegisterCollegePage />} />
       <Route path='/register/college' element={<RegisterCollegePage />} />  
-      <Route path='/others/fellowships' element={<Fellowship />} />
-      <Route path='/others/training' element={<Training />} />
+      <Route path='/others/healthcare-initiatives' element={<HealthcareInitiatives />} />
+      <Route path='/others/community-programs' element={<CommunityPrograms />} />
 
       <Route path='/browse/add-admin' element={<AddAdminPage />} />
 

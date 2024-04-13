@@ -1,13 +1,13 @@
 import React from 'react'
 import {BsArrowRight} from 'react-icons/bs'
-const Fellowship = () => {
+const HealthcareInitiatives = () => {
   return (
     <div>
       
         <section className="h-auto">
           <div className="max-w-7xl mx-auto py-16 px-4 sm:py-24 sm:px-6 lg:px-8 text-center">
             <p className="text-xl font-bold text-gray-900 sm:text-5xl sm:tracking-tight lg:text-5xl">
-              Get Information on various Fellowships offered by AICTE
+              Get Information on various Healthcare Initiatives offered by the government
             </p>
             <p className="max-w-3xl mt-5 mx-auto text-xl text-gray-500">
               Grow yourself and make your research easy with these government offered fellowships
@@ -114,4 +114,4 @@ const Fellowship = () => {
   )
 }
 
-export default Fellowship
+export default HealthcareInitiatives

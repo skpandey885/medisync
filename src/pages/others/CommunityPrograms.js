@@ -1,6 +1,6 @@
 import React from 'react'
 import {BsArrowRight} from 'react-icons/bs'
-const Training = () => {
+const CommunityPrograms = () => {
     return (
         <div>
             <section className="text-gray-600 body-font overflow-hidden">
@@ -168,4 +168,4 @@ const Training = () => {
     )
 }
 
-export default Training
+export default CommunityPrograms
