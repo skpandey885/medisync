@@ -5,9 +5,7 @@ import { query, collection, getDocs, where } from "firebase/firestore";
 import { useState, useEffect } from "react";
 
 import { db } from "../firebase";
-const Verifycard = ({ hospital }) => {
-  console.log(hospital);
-
+const HospitalCard = ({ hospital }) => {
   const [serviceNames, setServiceNames] = useState("");
 
   useEffect(() => {
@@ -38,18 +36,18 @@ const Verifycard = ({ hospital }) => {
   return (
     <div>
       <Link state={hospital} to={`/browse/verify/${hospital?._id} `}>
-        <div className="p-5  w-[320px] bg-white rounded-lg border shadow-md sm:p-8  ">
+        <div className="p-5 ml-[40px] my-[10px]  w-[400px] bg-white rounded-lg border shadow-md sm:p-8  ">
           <div className="flex items-baseline text-gray-900 ">
             <span className="text-3xl font-extrabold tracking-tight">
               {hospital?.name}
             </span>
           </div>
           {/* List */}
-          <ul role="list" className="my-7 space-y-5">
+          <ul role="list" className="space-y-5 my-7">
             <li className="flex space-x-3">
               {/* Icon */}
 
-              <span className="text-xl font-bold leading-tight text-blue  ">
+              <span className="text-xl font-bold leading-tight text-blue ">
                 Address :{" "}
                 <span className="text-lg font-normal">{hospital?.address}</span>
                 {/* {data._id} */}
@@ -58,7 +56,7 @@ const Verifycard = ({ hospital }) => {
             <li className="flex space-x-3">
               {/* Icon */}
 
-              <span className="text-xl font-bold leading-tight text-blue  ">
+              <span className="text-xl font-bold leading-tight text-blue ">
                 Contact :{" "}
                 <span className="text-lg font-normal ">
                   {hospital?.contact}
@@ -69,7 +67,7 @@ const Verifycard = ({ hospital }) => {
             <li className="flex space-x-3">
               {/* Icon */}
 
-              <span className="text-xl font-bold leading-tight text-blue  ">
+              <span className="text-xl font-bold leading-tight text-blue ">
                 Doctors :{" "}
                 <span className="text-lg font-normal ">
                   {hospital?.doctors}
@@ -81,7 +79,7 @@ const Verifycard = ({ hospital }) => {
             <li className="flex space-x-3">
               {/* Icon */}
 
-              <span className="text-xl font-bold leading-tight text-blue  ">
+              <span className="text-xl font-bold leading-tight text-blue ">
                 Beds :{" "}
                 <span className="text-lg font-normal ">{hospital?.beds}</span>
                 {/* {data.mobile} */}
@@ -90,7 +88,7 @@ const Verifycard = ({ hospital }) => {
             <li className="flex space-x-3">
               {/* Icon */}
 
-              <span className="text-xl font-bold leading-tight text-blue  ">
+              <span className="text-xl font-bold leading-tight text-blue ">
                 Nurses :{" "}
                 <span className="text-lg font-normal ">{hospital?.nurses}</span>
                 {/* {data.email} */}
@@ -103,16 +101,16 @@ const Verifycard = ({ hospital }) => {
               </span>
             </li>
           </ul>
-          <button
+          {/* <button
             type="button"
             className="text-white bg-blue-600 hover:bg-blue-700 focus:ring-4 focus:outline-none focus:ring-blue-200 dark:focus:ring-blue-900 font-medium rounded-lg text-sm px-5 py-2.5 inline-flex justify-center w-full text-center"
           >
-            Verify Student
-          </button>
+   
+          </button> */}
         </div>
       </Link>
     </div>
   );
 };
 
-export default Verifycard;
+export default HospitalCard;

@@ -8,18 +8,18 @@ const ServiceCard = ({ service }) => {
   return (
     <div>
       <Link state={service} to={`/browse/verify/${service?._id} `}>
-        <div className="p-5  w-[320px] bg-white rounded-lg border shadow-md sm:p-8  ">
+        <div className="p-5 ml-[40px] my-[10px]  w-[400px] bg-white rounded-lg border shadow-md sm:p-8  ">
           <div className="flex items-baseline text-gray-900 ">
             <span className="text-3xl font-extrabold tracking-tight">
               {service?.serviceName}
             </span>
           </div>
           {/* List */}
-          <ul role="list" className="my-7 space-y-5">
+          <ul role="list" className="space-y-5 my-7">
             <li className="flex space-x-3">
               {/* Icon */}
 
-              <span className="text-xl font-bold leading-tight text-blue  ">
+              <span className="text-xl font-bold leading-tight text-blue ">
                 Service Identifier :{" "}
                 <span className="text-lg font-normal">{service?.id}</span>
                 {/* {data._id} */}
@@ -28,7 +28,7 @@ const ServiceCard = ({ service }) => {
             <li className="flex space-x-3">
               {/* Icon */}
 
-              <span className="text-xl font-bold leading-tight text-blue  ">
+              <span className="text-xl font-bold leading-tight text-blue ">
                 Department :{" "}
                 <span className="text-lg font-normal ">
                   {service?.department}
@@ -38,7 +38,7 @@ const ServiceCard = ({ service }) => {
             <li className="flex space-x-3">
               {/* Icon */}
 
-              <span className="text-xl font-bold leading-tight text-blue  ">
+              <span className="text-xl font-bold leading-tight text-blue ">
                 Description :{" "}
                 <span className="text-lg font-normal ">
                   {service?.description}
@@ -47,7 +47,7 @@ const ServiceCard = ({ service }) => {
             </li>
 
             <li className="flex space-x-3">
-              <span className="text-xl font-bold leading-tight text-blue  ">
+              <span className="text-xl font-bold leading-tight text-blue ">
                 Reviews :{" "}
                 <span className="text-lg font-normal ">{service?.reviews}</span>
               </span>

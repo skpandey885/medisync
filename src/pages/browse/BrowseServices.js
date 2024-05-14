@@ -1,9 +1,9 @@
 import { useEffect, useState } from "react";
 import { db } from "../../firebase";
-import { addDoc, collection, onSnapshot } from "firebase/firestore";
-import { Hospital } from "../../models";
-import Verifycard from "../../components/Verifycard";
+import { collection, onSnapshot } from "firebase/firestore";
+
 import ServiceCard from "../../components/ServiceCard";
+import Loader from "../../components/Loader";
 
 function BrowseHospitals() {
   const [services, setServices] = useState([]);
@@ -22,12 +22,16 @@ function BrowseHospitals() {
 
   return (
     <div>
-      <h2>Hospitals</h2>
-      <div className="flex flex-wrap gap-8 py-8  ">
+      <h2 className='flex items-center gap-2 text-2xl font-bold text-gray-700 m-[20px]'>
+      /services</h2>
+
+      {services.length ?
+      <div className="flex flex-wrap gap-8 py-8 ">
         {services.map((service) => (
           <ServiceCard key={service.id} service={service} />
         ))}
       </div>
+: <Loader/>}
     </div>
   );
 }

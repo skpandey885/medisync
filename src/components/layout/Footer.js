@@ -6,12 +6,12 @@ import { BsGithub } from "react-icons/bs";
 const Footer = () => {
   return (
     <div>
-      <section className="bg-white dark:bg-main-dark-bg w-full  bottom-0 border-t">
+      <section className="bottom-0 w-full bg-white border-t dark:bg-main-dark-bg">
         <div className="max-w-screen-xl px-4 py-5 mx-auto space-y-8 overflow-hidden sm:px-6 lg:px-8">
           <nav className="flex flex-wrap justify-center -mx-5 -my-2">
             <div className="px-5 py-2">
               <a
-                href="/About"
+                href="#"
                 className="text-base leading-6 text-gray-500 hover:text-gray-900"
               >
                 About Us
@@ -20,7 +20,7 @@ const Footer = () => {
 
             <div className="px-5 py-2">
               <a
-                href="/Contact"
+                href="#"
                 className="text-base leading-6 text-gray-500 hover:text-gray-900"
               >
                 Contact Us
@@ -29,7 +29,7 @@ const Footer = () => {
 
             <div className="px-5 py-2">
               <a
-                href="/Terms"
+                href="#"
                 className="text-base leading-6 text-gray-500 hover:text-gray-900"
               >
                 Terms
