@@ -1,21 +1,14 @@
-import { useEffect, useState } from "react";
-import { db } from "../../firebase";
-import { addDoc, collection, onSnapshot } from "firebase/firestore";
-import { Hospital } from "../../models";
+import { collection, onSnapshot } from "firebase/firestore";
+import React, { useEffect, useState } from "react";
 import HospitalCard from "../../components/HospitalCard";
 import Loader from "../../components/Loader";
+import { db } from "../../firebase";
+
 function BrowseHospitals() {
   const [hospitals, setHospitals] = useState([]);
   const [searchQuery, setSearchQuery] = useState("");
   const [filteredHospitals, setFilteredHospitals] = useState([]);
 
-  useEffect(() => {
-    const filteredData = hospitals.filter((hospital) =>
-      hospital.name.toLowerCase().includes(searchQuery.toLowerCase())
-    );
-    setFilteredHospitals(filteredData);
-  }, [searchQuery, hospitals]);
-  
   useEffect(() => {
     const unsubscribe = onSnapshot(collection(db, "hospitals"), (snapshot) => {
       const hospitalsData = [];
@@ -27,6 +20,13 @@ function BrowseHospitals() {
 
     return () => unsubscribe();
   }, []);
+
+  useEffect(() => {
+    const filteredData = hospitals.filter((hospital) =>
+      hospital.name.toLowerCase().includes(searchQuery.toLowerCase())
+    );
+    setFilteredHospitals(filteredData);
+  }, [searchQuery, hospitals]);
 
   return (
     <div className="flex flex-col items-center">
@@ -40,17 +40,15 @@ function BrowseHospitals() {
           className="w-full px-4 py-2 border border-gray-300 rounded-full shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
         />
       </div>
-     
 
-    {hospitals.length ?
-    <div className="flex flex-wrap gap-8 py-8 ">
-     {hospitals.map((hospital) => (
-     <HospitalCard key={hospital.id} hospital={hospital} />
-       ))}
-   </div> : <Loader/>}
+      <div className="flex flex-wrap gap-4">
+        {filteredHospitals.map((hospital) => (
+          <HospitalCard key={hospital.id} hospital={hospital} className="w-full sm:w-1/2 md:w-1/3" />
+        ))}
+      </div>
+
+      {filteredHospitals.length ? null : <Loader />}
     </div>
-     
-  
   );
 }
 
