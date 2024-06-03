@@ -18,7 +18,7 @@ const Info = () => {
           Unlock a world of streamlined healthcare access and transparency
           through our cutting-edge features
         </p>
-        <div className="grid grid-cols-1 gap-8 mt-10 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
+        <div className="grid grid-cols-1 gap-8 mt-10 sm:grid-cols-2 lg:grid-cols-3">
           <div className="flex flex-col items-center justify-center p-8 space-y-4 bg-gray-100 rounded-xl">
             <div className="p-3 text-white bg-blue-500 rounded-full">
               <GiMedicines size={40} />

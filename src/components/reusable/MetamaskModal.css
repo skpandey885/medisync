@@ -1,0 +1,92 @@
+.metamask-modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.5);
+  backdrop-filter: blur(5px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  opacity: 1;
+  transition: opacity 0.3s ease-in-out;
+}
+
+.metamask-modal {
+  font-size: 12px;
+  background: white;
+  border-radius: 10px;
+  max-width: 400px;
+  padding: 20px;
+  opacity: 3;
+  transform: scale(0.9);
+  transition: opacity 0.3s ease-in-out, transform 0.3s ease-in-out;
+}
+
+.metamask-modal > .header {
+  width: 100%;
+  border-bottom: 1px solid gray;
+  font-size: 18px;
+  text-align: center;
+  padding: 5px;
+}
+
+.metamask-modal > .content {
+  width: 100%;
+  padding: 10px 5px;
+}
+
+.metamask-modal > .actions {
+  width: 100%;
+  padding: 10px 5px;
+  margin: auto;
+  text-align: center;
+}
+
+.metamask-modal > .close {
+  cursor: pointer;
+  position: absolute;
+  display: block;
+  padding: 2px 5px;
+  line-height: 20px;
+  right: -10px;
+  top: -10px;
+  font-size: 24px;
+  background: #ffffff;
+  border-radius: 18px;
+  border: 1px solid #cfcece;
+}
+
+.metamask-modal .primary-btn {
+  background-color: #4caf50;
+  color: white;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 16px;
+}
+
+.metamask-modal .button {
+  background-color: #008cba;
+  color: white;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 16px;
+  margin: 5px;
+}
+
+.reactjs-popup-content {
+  width: auto !important;
+  padding: 0 !important;
+  background: none !important;
+  box-shadow: none !important;
+  border: none !important;
+}
+
+.reactjs-popup-overlay {
+  opacity: 1 !important;
+}
