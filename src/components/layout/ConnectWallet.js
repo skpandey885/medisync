@@ -5,7 +5,7 @@ import { contractABI, contractAddress } from "../../contract/blockchain";
 import MetamaskModal from "../reusable/MetamaskModal";
 
 export const shortenAddress = (address) => {
-  return address.slice(0, 6) + "..." + address.slice(-5, 0);
+  return address.slice(0, 6) + "..." + address.slice(-5);
 };
 
 const ConnectWallet = () => {
@@ -15,7 +15,6 @@ const ConnectWallet = () => {
   const [modalIsOpen, setModalIsOpen] = useState(false);
 
   const checkIfAdmin = useCallback(async () => {
-    console.log("Inside check admin");
     try {
       if (contract && accountAddress) {
         const isAdmin = await contract.checkIfAdmin();
@@ -50,12 +49,17 @@ const ConnectWallet = () => {
 
   useEffect(() => {
     checkIfAdmin();
-  }, [checkIfAdmin]);
+  }, [checkIfAdmin, accountAddress]); // Update checkIfAdmin when accountAddress changes
 
   const handleConnectWallet = async () => {
     if (window.ethereum) {
       try {
-        await window.ethereum.request({ method: "eth_requestAccounts" });
+        const accounts = await window.ethereum.request({
+          method: "eth_requestAccounts",
+        });
+        if (accounts.length > 0) {
+          setAccountAddress(accounts[0]); // Update accountAddress after successful connection
+        }
       } catch (err) {
         console.error("Failed to connect wallet:", err);
       }
