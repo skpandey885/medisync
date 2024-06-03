@@ -1,7 +1,7 @@
 import { collection, getDocs, query, where } from 'firebase/firestore';
 import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
-import { db } from '../firebase';
+import { db } from '../firebase/firebase';
 
 const HospitalCard = ({ hospital }) => {
   const [serviceNames, setServiceNames] = useState("");

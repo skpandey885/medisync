@@ -1,25 +1,32 @@
 import React, { useEffect, useState } from 'react'
-import { useAccount, useConnect, useContract, useSigner } from 'wagmi'
-import { InjectedConnector } from 'wagmi/connectors/injected'
-import { HiCheckCircle } from 'react-icons/hi'
+import { Link } from 'react-router-dom';
+import { useAccount, useSigner } from 'wagmi'
+import { useAuth } from '../../contexts/authContext'
 
 export const shortenAddress = (address) => {
   return address.slice(0, 6) + "..." + address.slice(-5, -1);
 };
 
+ const shortenMail = (mail) => {
+  return mail.slice(0, 3) + "..." + mail.slice(-5);
+};
 
 const Login = () => {
-  const [isAdmin,setIsAdmin] = useState(false);
-  const {data:account} = useAccount();
-  const {data:signer} = useSigner();
+  const { userLoggedIn } = useAuth()
+  const {currentUser} = useAuth()
+  // const [isAdmin,setIsAdmin] = useState(false);
+  // const {data:account} = useAccount();
+  // const {data:signer} = useSigner();
 
 const connect = ()=>{
    alert("Feature in Progress!")
 };
   
-  
+console.log(currentUser )
   return (
-    <button onClick={connect} className='primary-btn'>Login</button>
+    <Link to="/login"> <button className='primary-btn'> 
+    {userLoggedIn ? shortenMail(currentUser.email): "Log In"}
+    </button></Link>
   )
 }
 

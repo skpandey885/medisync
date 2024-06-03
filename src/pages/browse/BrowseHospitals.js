@@ -2,7 +2,7 @@ import { collection, onSnapshot } from "firebase/firestore";
 import React, { useEffect, useState } from "react";
 import HospitalCard from "../../components/HospitalCard";
 import Loader from "../../components/Loader";
-import { db } from "../../firebase";
+import { db } from "../../firebase/firebase";
 
 function BrowseHospitals() {
   const [hospitals, setHospitals] = useState([]);

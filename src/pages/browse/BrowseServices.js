@@ -1,6 +1,6 @@
 import { collection, onSnapshot } from "firebase/firestore";
 import React, { useEffect, useState } from "react";
-import { db } from "../../firebase";
+import { db } from "../../firebase/firebase";
 
 import Loader from "../../components/Loader";
 import ServiceCard from "../../components/ServiceCard";

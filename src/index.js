@@ -17,7 +17,9 @@ import HealthcareInitiatives from "./pages/others/HealthcareInitiatives";
 import HealthcareConferences from "./pages/others/HealthcareConferences";
 import BrowseHospitals from "./pages/browse/BrowseHospitals";
 import BrowseServices from "./pages/browse/BrowseServices";
-
+import Login from "./components/auth/login";
+import { AuthProvider } from "./contexts/authContext";
+import Register from "./components/auth/register";
 const root = ReactDOM.createRoot(document.getElementById("root"));
 const client = createClient({
   autoConnect: true,
@@ -26,17 +28,19 @@ const client = createClient({
 root.render(
   <>
     <WagmiConfig client={client}>
+    <AuthProvider>
       <BrowserRouter>
         <Toaster />
         <Navbar />
         <Routes>
           <Route path="/" element={<App />} />
-
           <Route
             path="/availability/services-tracking"
             element={<BrowseServices />}
           />
           <Route path="/browse/hospitals" element={<BrowseHospitals />} />
+          <Route path="/login" element={<Login />} />
+          <Route path="/register" element={<Register />} />
 
           <Route path="/browse/doctors" element={<FIP/>} />
           <Route
@@ -63,6 +67,7 @@ root.render(
         </Routes>
         <Footer />
       </BrowserRouter>
+      </AuthProvider>
     </WagmiConfig>
   </>
 );

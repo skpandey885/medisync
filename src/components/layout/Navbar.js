@@ -21,8 +21,8 @@ const Navbar = () => {
         <Link to="/">
           <Logo />
         </Link>
-        <div className="md:flex items-center justify-between hidden w-full md:w-auto">
-          <div className="md:flex items-center justify-between">
+        <div className="items-center justify-between hidden w-full md:flex md:w-auto">
+          <div className="items-center justify-between md:flex">
             <Hospitals />
             <Doctors />
             <AvailabilityDropdown />
