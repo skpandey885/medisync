@@ -8,7 +8,7 @@ import {
 } from "../../firebase/auth";
 
 const Login = () => {
-  const { userLoggedIn } = useAuth();
+  const { userLoggedIn, updateIsAdmin } = useAuth();
 
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -34,7 +34,8 @@ const Login = () => {
     if (!isSigningInG) {
       setIsSigningInG(true);
       try {
-        await doSignInWithGoogle();
+        const res = await doSignInWithGoogle(updateIsAdmin);
+        console.log(res);
       } catch (err) {
         toast.error(err.message);
         setIsSigningInG(false);

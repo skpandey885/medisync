@@ -14,6 +14,7 @@ export function AuthProvider({ children }) {
   const [isEmailUser, setIsEmailUser] = useState(false);
   const [isGoogleUser, setIsGoogleUser] = useState(false);
   const [loading, setLoading] = useState(true);
+  const [isAdmin, setIsAdmin] = useState(false);
 
   useEffect(() => {
     const unsubscribe = onAuthStateChanged(auth, initializeUser);
@@ -49,11 +50,17 @@ export function AuthProvider({ children }) {
     setLoading(false);
   }
 
+  const updateIsAdmin = (value) => {
+    setIsAdmin(value);
+  };
+
   const value = {
     userLoggedIn,
     isEmailUser,
     isGoogleUser,
     currentUser,
+    isAdmin,
+    updateIsAdmin,
     setCurrentUser,
     doSignOut,
   };

@@ -11,15 +11,14 @@ const shortenMail = (mail) => {
 };
 
 const Login = () => {
-  const { userLoggedIn, currentUser, doSignOut } = useAuth();
+  const { userLoggedIn, currentUser, isAdmin, doSignOut, updateIsAdmin } =
+    useAuth();
   const [dropdownVisible, setDropdownVisible] = useState(false);
-  // const [isAdmin,setIsAdmin] = useState(false);
-  // const {data:account} = useAccount();
-  // const {data:signer} = useSigner();
 
   const handleLogout = async () => {
     try {
       await doSignOut();
+      updateIsAdmin(false);
       setDropdownVisible(false); // Close dropdown after logout
     } catch (e) {
       alert("Failed to log out");
@@ -30,7 +29,7 @@ const Login = () => {
     <div className="relative">
       {userLoggedIn ? (
         <button
-          className="primary-btn"
+          className={`primary-btn ${isAdmin ? "bg-green-600" : ""}`}
           onClick={() => setDropdownVisible(!dropdownVisible)}
         >
           {shortenMail(currentUser.email)}
