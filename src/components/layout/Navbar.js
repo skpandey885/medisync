@@ -1,5 +1,6 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
+import { useAuth } from "../../contexts/authContext";
 import AvailabilityDropdown from "./AvailabilityDropdown";
 import AwareDropdown from "./AwareDropdown";
 import ConnectWallet from "./ConnectWallet.js";
@@ -9,11 +10,33 @@ import Login from "./Login.js";
 import Logo from "./Logo";
 
 const Navbar = () => {
+  const { isAdmin } = useAuth();
   const [isOpen, setIsOpen] = useState(false);
+  const [storedIsAdmin, setStoredIsAdmin] = useState(null); // State to store isAdmin from local storage
 
   const toggleMenu = () => {
     setIsOpen(!isOpen);
   };
+  console.log(isAdmin);
+  useEffect(() => {
+    // Get isAdmin from local storage on component mount
+    const isAdminStored = localStorage.getItem("isAdmin");
+    setStoredIsAdmin(isAdminStored === "true"); // Convert string to boolean
+  }, []);
+
+  useEffect(() => {
+    // Update isAdmin in local storage whenever it changes
+    if (isAdmin !== null) {
+      localStorage.setItem("isAdmin", isAdmin.toString());
+    }
+  }, [isAdmin]);
+
+  useEffect(() => {
+    // Update storedIsAdmin whenever isAdmin changes
+    if (isAdmin !== null) {
+      setStoredIsAdmin(isAdmin);
+    }
+  }, [isAdmin]);
 
   return (
     <header className="z-50 px-6 py-4 bg-white shadow-md">
@@ -27,10 +50,13 @@ const Navbar = () => {
             <Doctors />
             <AvailabilityDropdown />
             <AwareDropdown />
+            <Login />
+            {storedIsAdmin && ( // Use storedIsAdmin instead of isAdmin directly
+              <div className="ml-4">
+                <ConnectWallet />
+              </div>
+            )}
           </div>
-          <Login />
-          <ConnectWallet />
-          {/* add check for admin based visibility of connect wallet button */}
         </div>
         <div className="md:hidden">
           <button
@@ -71,8 +97,11 @@ const Navbar = () => {
             <AvailabilityDropdown />
             <AwareDropdown />
             <Login />
-            <ConnectWallet />
-            {/* add check for admin based visibility of connect wallet button */}
+            {storedIsAdmin && (
+              <div className="mt-4">
+                <ConnectWallet />
+              </div>
+            )}
           </div>
         </div>
       </nav>

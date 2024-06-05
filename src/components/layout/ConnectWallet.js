@@ -9,17 +9,18 @@ export const shortenAddress = (address) => {
 };
 
 const ConnectWallet = () => {
-  const [isAdmin, setIsAdmin] = useState(false);
+  const [isBlockchainAdmin, setIsBlockchainAdmin] = useState(false);
   const [accountAddress, setAccountAddress] = useState("");
   const [contract, setContract] = useState(null);
   const [modalIsOpen, setModalIsOpen] = useState(false);
+  const [isConnecting, setIsConnecting] = useState(false);
 
-  const checkIfAdmin = useCallback(async () => {
+  const checkIfBlockchainAdmin = useCallback(async () => {
     try {
       if (contract && accountAddress) {
         const isAdmin = await contract.checkIfAdmin();
-        console.log(isAdmin + " is admin log");
-        setIsAdmin(isAdmin);
+        console.log(isAdmin + " is blockchain admin log");
+        setIsBlockchainAdmin(isAdmin);
       }
     } catch (err) {
       console.error(err);
@@ -48,20 +49,28 @@ const ConnectWallet = () => {
   }, []);
 
   useEffect(() => {
-    checkIfAdmin();
-  }, [checkIfAdmin, accountAddress]); // Update checkIfAdmin when accountAddress changes
+    checkIfBlockchainAdmin();
+  }, [checkIfBlockchainAdmin, accountAddress]);
 
   const handleConnectWallet = async () => {
+    if (isConnecting) {
+      console.log("Already processing eth_requestAccounts. Please wait.");
+      return;
+    }
+
     if (window.ethereum) {
       try {
+        setIsConnecting(true);
         const accounts = await window.ethereum.request({
           method: "eth_requestAccounts",
         });
         if (accounts.length > 0) {
-          setAccountAddress(accounts[0]); // Update accountAddress after successful connection
+          setAccountAddress(accounts[0]);
         }
       } catch (err) {
         console.error("Failed to connect wallet:", err);
+      } finally {
+        setIsConnecting(false);
       }
     } else {
       setModalIsOpen(true);
@@ -72,7 +81,7 @@ const ConnectWallet = () => {
     setModalIsOpen(false);
   };
 
-  if (isAdmin) {
+  if (isBlockchainAdmin) {
     return (
       <div className="bg-green-50 inline-flex items-center gap-1 text-green-500 font-medium px-4 py-2 rounded cursor-pointer">
         {shortenAddress(accountAddress)}{" "}

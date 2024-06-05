@@ -1,6 +1,7 @@
 import { onAuthStateChanged, signOut } from "firebase/auth";
+import { collection, getDocs, query, where } from "firebase/firestore";
 import React, { useContext, useEffect, useState } from "react";
-import { auth } from "../firebase/firebase";
+import { auth, db } from "../firebase/firebase";
 
 const AuthContext = React.createContext();
 
@@ -17,7 +18,9 @@ export function AuthProvider({ children }) {
   const [isAdmin, setIsAdmin] = useState(false);
 
   useEffect(() => {
-    const unsubscribe = onAuthStateChanged(auth, initializeUser);
+    const unsubscribe = onAuthStateChanged(auth, async (user) => {
+      await initializeUser(user);
+    });
     return unsubscribe;
   }, []);
 
@@ -25,34 +28,48 @@ export function AuthProvider({ children }) {
     return signOut(auth);
   };
 
+  const updateIsAdmin = (value) => {
+    setIsAdmin(value);
+  };
+
   async function initializeUser(user) {
     if (user) {
       setCurrentUser({ ...user });
 
-      // check if provider is email and password login
       const isEmail = user.providerData.some(
         (provider) => provider.providerId === "password"
       );
       setIsEmailUser(isEmail);
 
-      // check if the auth provider is google or not
-      //   const isGoogle = user.providerData.some(
-      //     (provider) => provider.providerId === GoogleAuthProvider.PROVIDER_ID
-      //   );
-      //   setIsGoogleUser(isGoogle);
+      const uid = user.uid;
+
+      try {
+        const adminDoc = await getDocs(
+          query(
+            collection(db, "roles"),
+            where("adminIds", "array-contains", uid)
+          )
+        );
+
+        if (!adminDoc.empty) {
+          setIsAdmin(true);
+        } else {
+          setIsAdmin(false);
+        }
+      } catch (error) {
+        console.error("Error checking admin status: ", error);
+        setIsAdmin(false);
+      }
 
       setUserLoggedIn(true);
     } else {
       setCurrentUser(null);
       setUserLoggedIn(false);
+      setIsAdmin(false);
     }
 
     setLoading(false);
   }
-
-  const updateIsAdmin = (value) => {
-    setIsAdmin(value);
-  };
 
   const value = {
     userLoggedIn,
