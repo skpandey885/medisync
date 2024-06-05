@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { useAuth } from "../../contexts/authContext";
+import AdminDropdown from "./AdminDropdown.js";
 import AvailabilityDropdown from "./AvailabilityDropdown";
 import AwareDropdown from "./AwareDropdown";
 import ConnectWallet from "./ConnectWallet.js";
@@ -12,27 +13,24 @@ import Logo from "./Logo";
 const Navbar = () => {
   const { isAdmin } = useAuth();
   const [isOpen, setIsOpen] = useState(false);
-  const [storedIsAdmin, setStoredIsAdmin] = useState(null); // State to store isAdmin from local storage
+  const [storedIsAdmin, setStoredIsAdmin] = useState(null);
 
   const toggleMenu = () => {
     setIsOpen(!isOpen);
   };
-  console.log(isAdmin);
+
   useEffect(() => {
-    // Get isAdmin from local storage on component mount
     const isAdminStored = localStorage.getItem("isAdmin");
-    setStoredIsAdmin(isAdminStored === "true"); // Convert string to boolean
+    setStoredIsAdmin(isAdminStored === "true");
   }, []);
 
   useEffect(() => {
-    // Update isAdmin in local storage whenever it changes
     if (isAdmin !== null) {
       localStorage.setItem("isAdmin", isAdmin.toString());
     }
   }, [isAdmin]);
 
   useEffect(() => {
-    // Update storedIsAdmin whenever isAdmin changes
     if (isAdmin !== null) {
       setStoredIsAdmin(isAdmin);
     }
@@ -46,12 +44,17 @@ const Navbar = () => {
         </Link>
         <div className="items-center justify-between hidden w-full md:flex md:w-auto">
           <div className="items-center justify-between md:flex">
+            {storedIsAdmin && (
+              <div className="ml-4">
+                <AdminDropdown />
+              </div>
+            )}
             <Hospitals />
             <Doctors />
             <AvailabilityDropdown />
             <AwareDropdown />
             <Login />
-            {storedIsAdmin && ( // Use storedIsAdmin instead of isAdmin directly
+            {storedIsAdmin && (
               <div className="ml-4">
                 <ConnectWallet />
               </div>
@@ -92,6 +95,11 @@ const Navbar = () => {
               isOpen ? "block" : "hidden"
             } absolute top-16 left-0 w-full bg-white shadow-md md:relative md:top-0 md:left-0 md:w-auto md:flex flex-col md:flex-row items-center gap-4 p-4 md:p-0`}
           >
+            {storedIsAdmin && (
+              <div className="mt-4">
+                <AdminDropdown />
+              </div>
+            )}
             <Hospitals />
             <Doctors />
             <AvailabilityDropdown />
