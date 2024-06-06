@@ -2,7 +2,7 @@
 
 export { contractABI, contractAddress };
 
-const contractAddress = "0x27198c8613DE715953c1D5C096aD66f25c3452Eb"; // Replace with your deployed contract address
+const contractAddress = "0x5FCbD1402983A92eAcc94EaDeE847e1dA48f3808"; // Replace with your deployed contract address
 
 const contractABI = [
   {
@@ -19,6 +19,34 @@ const contractABI = [
     type: "function",
   },
   {
+    inputs: [
+      {
+        internalType: "string",
+        name: "hospitalId",
+        type: "string",
+      },
+      {
+        internalType: "uint256",
+        name: "medicineId",
+        type: "uint256",
+      },
+      {
+        internalType: "string",
+        name: "name",
+        type: "string",
+      },
+      {
+        internalType: "uint256",
+        name: "quantity",
+        type: "uint256",
+      },
+    ],
+    name: "addMedicineToHospital",
+    outputs: [],
+    stateMutability: "nonpayable",
+    type: "function",
+  },
+  {
     inputs: [],
     stateMutability: "nonpayable",
     type: "constructor",
@@ -28,33 +56,14 @@ const contractABI = [
     inputs: [
       {
         indexed: false,
-        internalType: "address",
-        name: "newAdmin",
-        type: "address",
-      },
-    ],
-    name: "AdminAdded",
-    type: "event",
-  },
-  {
-    anonymous: false,
-    inputs: [
-      {
-        indexed: false,
-        internalType: "uint256",
-        name: "hospitalId",
-        type: "uint256",
-      },
-      {
-        indexed: false,
         internalType: "string",
-        name: "name",
+        name: "hospitalId",
         type: "string",
       },
       {
         indexed: false,
         internalType: "string",
-        name: "location",
+        name: "name",
         type: "string",
       },
     ],
@@ -66,9 +75,9 @@ const contractABI = [
     inputs: [
       {
         indexed: false,
-        internalType: "uint256",
+        internalType: "string",
         name: "hospitalId",
-        type: "uint256",
+        type: "string",
       },
       {
         indexed: false,
@@ -91,15 +100,9 @@ const contractABI = [
     inputs: [
       {
         indexed: false,
-        internalType: "uint256",
-        name: "distributionCenterId",
-        type: "uint256",
-      },
-      {
-        indexed: false,
-        internalType: "uint256",
+        internalType: "string",
         name: "hospitalId",
-        type: "uint256",
+        type: "string",
       },
       {
         indexed: false,
@@ -120,18 +123,13 @@ const contractABI = [
   {
     inputs: [
       {
-        internalType: "uint256",
-        name: "hospitalId",
-        type: "uint256",
-      },
-      {
         internalType: "string",
-        name: "name",
+        name: "hospitalId",
         type: "string",
       },
       {
         internalType: "string",
-        name: "location",
+        name: "name",
         type: "string",
       },
     ],
@@ -143,14 +141,27 @@ const contractABI = [
   {
     inputs: [
       {
-        internalType: "uint256",
-        name: "hospitalId",
-        type: "uint256",
+        internalType: "string[]",
+        name: "hospitalIdst",
+        type: "string[]",
       },
       {
-        internalType: "uint256",
-        name: "distributionCenterId",
-        type: "uint256",
+        internalType: "string[]",
+        name: "names",
+        type: "string[]",
+      },
+    ],
+    name: "registerMultipleHospitals",
+    outputs: [],
+    stateMutability: "nonpayable",
+    type: "function",
+  },
+  {
+    inputs: [
+      {
+        internalType: "string",
+        name: "hospitalId",
+        type: "string",
       },
       {
         internalType: "uint256[]",
@@ -171,9 +182,9 @@ const contractABI = [
   {
     inputs: [
       {
-        internalType: "uint256",
+        internalType: "string",
         name: "hospitalId",
-        type: "uint256",
+        type: "string",
       },
       {
         internalType: "uint256[]",
@@ -205,104 +216,47 @@ const contractABI = [
     type: "function",
   },
   {
-    inputs: [
-      {
-        internalType: "uint256",
-        name: "",
-        type: "uint256",
-      },
-    ],
-    name: "distributionCenterMedicines",
+    inputs: [],
+    name: "getHospitalsData",
     outputs: [
       {
-        internalType: "uint256",
+        internalType: "string[]",
         name: "",
-        type: "uint256",
+        type: "string[]",
+      },
+      {
+        internalType: "string[]",
+        name: "",
+        type: "string[]",
       },
     ],
     stateMutability: "view",
     type: "function",
   },
   {
-    inputs: [],
-    name: "getHospitalIds",
+    inputs: [
+      {
+        internalType: "string",
+        name: "hospitalId",
+        type: "string",
+      },
+    ],
+    name: "getMedicinesAtHospital",
     outputs: [
       {
         internalType: "uint256[]",
         name: "",
         type: "uint256[]",
       },
-    ],
-    stateMutability: "view",
-    type: "function",
-  },
-  {
-    inputs: [
       {
-        internalType: "uint256",
-        name: "hospitalId",
-        type: "uint256",
-      },
-    ],
-    name: "getHospitalInfo",
-    outputs: [
-      {
-        internalType: "uint256",
-        name: "id",
-        type: "uint256",
+        internalType: "string[]",
+        name: "",
+        type: "string[]",
       },
       {
-        internalType: "string",
-        name: "name",
-        type: "string",
-      },
-      {
-        internalType: "string",
-        name: "location",
-        type: "string",
-      },
-    ],
-    stateMutability: "view",
-    type: "function",
-  },
-  {
-    inputs: [
-      {
-        internalType: "uint256",
-        name: "medicineId",
-        type: "uint256",
-      },
-    ],
-    name: "getMedicineQuantityAtDistributionCenter",
-    outputs: [
-      {
-        internalType: "uint256",
-        name: "quantity",
-        type: "uint256",
-      },
-    ],
-    stateMutability: "view",
-    type: "function",
-  },
-  {
-    inputs: [
-      {
-        internalType: "uint256",
-        name: "hospitalId",
-        type: "uint256",
-      },
-      {
-        internalType: "uint256",
-        name: "medicineId",
-        type: "uint256",
-      },
-    ],
-    name: "getMedicineQuantityAtHospital",
-    outputs: [
-      {
-        internalType: "uint256",
-        name: "quantity",
-        type: "uint256",
+        internalType: "uint256[]",
+        name: "",
+        type: "uint256[]",
       },
     ],
     stateMutability: "view",
@@ -319,9 +273,9 @@ const contractABI = [
     name: "hospitalIds",
     outputs: [
       {
-        internalType: "uint256",
+        internalType: "string",
         name: "",
-        type: "uint256",
+        type: "string",
       },
     ],
     stateMutability: "view",
@@ -330,50 +284,21 @@ const contractABI = [
   {
     inputs: [
       {
-        internalType: "uint256",
+        internalType: "string",
         name: "",
-        type: "uint256",
-      },
-      {
-        internalType: "uint256",
-        name: "",
-        type: "uint256",
-      },
-    ],
-    name: "hospitalMedicines",
-    outputs: [
-      {
-        internalType: "uint256",
-        name: "",
-        type: "uint256",
-      },
-    ],
-    stateMutability: "view",
-    type: "function",
-  },
-  {
-    inputs: [
-      {
-        internalType: "uint256",
-        name: "",
-        type: "uint256",
+        type: "string",
       },
     ],
     name: "hospitals",
     outputs: [
       {
-        internalType: "uint256",
-        name: "id",
-        type: "uint256",
-      },
-      {
         internalType: "string",
-        name: "name",
+        name: "id",
         type: "string",
       },
       {
         internalType: "string",
-        name: "location",
+        name: "name",
         type: "string",
       },
     ],

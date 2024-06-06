@@ -41,9 +41,9 @@ export default function AdminDropdown() {
                   className={`px-4 py-2 duration-100 rounded ${
                     active ? "bg-gray-100 text-black" : "text-gray-700"
                   }`}
-                  to="/admin/settings"
+                  to="/admin/utils"
                 >
-                  Settings
+                  UtilityTests
                 </Link>
               )}
             </Menu.Item>
