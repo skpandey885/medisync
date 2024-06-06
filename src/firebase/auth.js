@@ -41,6 +41,7 @@ export const doSignInWithGoogle = async (updateIsAdmin) => {
       )
     );
 
+    // console.log(admin);
     const rolesDoc = doc(db, "roles", "users");
     const rolesSnapshot = await getDoc(rolesDoc);
 

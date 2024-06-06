@@ -7,6 +7,17 @@ import {
   doSignInWithGoogle,
 } from "../../firebase/auth";
 
+import {
+  arrayUnion,
+  collection,
+  doc,
+  getDoc,
+  getDocs,
+  query,
+  updateDoc,
+  where,
+} from "firebase/firestore";
+import { db } from "../../firebase/firebase";
 const Login = () => {
   const { userLoggedIn, updateIsAdmin } = useAuth();
 
@@ -16,12 +27,48 @@ const Login = () => {
   const [isSigningInG, setIsSigningInG] = useState(false);
   const [errorMessage, setErrorMessage] = useState("");
 
+
+  const checkAdminForEmailAndPassword = async (uid)=>{
+    try {
+      const adminDoc = await getDocs(
+        query(
+          collection(db, "roles"),
+          where("adminIds", "array-contains", uid)
+        )
+      );
+
+      const rolesDoc = doc(db, "roles", "users");
+      const rolesSnapshot = await getDoc(rolesDoc);
+  
+      if (rolesSnapshot.exists()) {
+        const data = rolesSnapshot.data();
+        if (!data.userIds.includes(uid)) {
+          await updateDoc(rolesDoc, {
+            userIds: arrayUnion(uid),
+          });
+        }
+      } else {
+        console.error("No such document!");
+      }
+  
+      if (!adminDoc.empty) {
+        // User is an admin
+        console.log("Updating Admin.");
+        updateIsAdmin(true);
+      }
+    } catch (error) {
+      console.error("Error checking user UID: ", error);
+    }
+  }
+
   const onSubmit = async (e) => {
     e.preventDefault();
     if (!isSigningIn) {
       setIsSigningIn(true);
       try {
-        await doSignInWithEmailAndPassword(email, password);
+        const res = await doSignInWithEmailAndPassword(email, password);
+        checkAdminForEmailAndPassword(res.user.uid)
+        toast.success("Logged In Successfully.")
       } catch (e) {
         toast.error(e.message);
         setIsSigningIn(false);
@@ -35,6 +82,7 @@ const Login = () => {
       setIsSigningInG(true);
       try {
         const res = await doSignInWithGoogle(updateIsAdmin);
+        toast.success("Logged In Successfully.")
         console.log(res);
       } catch (err) {
         toast.error(err.message);
@@ -45,7 +93,8 @@ const Login = () => {
 
   return (
     <div>
-      {userLoggedIn && <Navigate to="/" replace={true} />}
+      {userLoggedIn && <Navigate to="/" replace={true} /> 
+   }
 
       <main className="flex self-center w-full h-screen place-content-center place-items-center">
         <div className="p-4 space-y-5 text-gray-600 border shadow-xl w-96 rounded-xl">

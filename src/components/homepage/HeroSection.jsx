@@ -15,7 +15,7 @@ const Hero = () => {
                       A Decentralized Intelligent Government Health Portal
                     </span>
                   </h4>
-                  <p className="mx-auto  text-base text-gray-500 sm:max-w-md lg:text-xl md:max-w-3xl">
+                  <p className="mx-auto text-base text-gray-500 sm:max-w-md lg:text-xl md:max-w-3xl">
                     Your digital gateway to comprehensive healthcare
                     information, services, and resources, ensuring access to
                     quality care for all citizens.
@@ -23,7 +23,7 @@ const Hero = () => {
 
                   <div className="relative flex flex-col sm:flex-row sm:space-x-4">
                     <a
-                      href="/register/student"
+                      href="/login"
                       className="flex items-center w-full px-6 py-3 mb-3 text-lg text-white bg-blue-500 rounded-md sm:mb-0 hover:bg-blue-700 sm:w-auto"
                     >
                       Get Started
@@ -35,7 +35,7 @@ const Hero = () => {
                 <div className="w-full h-auto overflow-hidden rounded-md shadow-xl sm:rounded-xl">
                   <img
                     src="https://img.freepik.com/free-vector/medics-working-charts_1262-19836.jpg?t=st=1712944955~exp=1712948555~hmac=84da9801e456a3a1566a986d65798e915aa96b12677933b1698a974c3a4433d1&w=1060"
-                    className="object-center object-cover h-full w-full"
+                    className="object-cover object-center w-full h-full"
                     alt="medical image"
                   />
                 </div>

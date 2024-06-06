@@ -1,6 +1,7 @@
-import React, { useState } from "react";
-import { Link } from "react-router-dom";
+import React, { useState, useEffect } from "react";
+import { Link , useNavigate} from "react-router-dom";
 import { useAuth } from "../../contexts/authContext";
+import { FaCircleUser } from "react-icons/fa6";
 
 export const shortenAddress = (address) => {
   return address.slice(0, 6) + "..." + address.slice(-5, -1);
@@ -11,8 +12,22 @@ const shortenMail = (mail) => {
 };
 
 const Login = () => {
+  const [storedIsAdmin, setStoredIsAdmin] = useState(null);
+  useEffect(() => {
+    const isAdminStored = localStorage.getItem("isAdmin");
+    setStoredIsAdmin(isAdminStored === "true");
+  }, []);
+
+  useEffect(() => {
+    console.log(storedIsAdmin);
+  }, [storedIsAdmin])
+  
+
+  const navigate = useNavigate();
   const { userLoggedIn, currentUser, isAdmin, doSignOut, updateIsAdmin } =
     useAuth();
+
+    console.log(isAdmin);
   const [dropdownVisible, setDropdownVisible] = useState(false);
 
   const handleLogout = async () => {
@@ -29,10 +44,14 @@ const Login = () => {
     <div className="relative">
       {userLoggedIn ? (
         <button
-          className={`primary-btn ${isAdmin ? "bg-green-600" : ""}`}
+        
+           className="mx-1 mt-2"
+          
           onClick={() => setDropdownVisible(!dropdownVisible)}
+        
         >
-          {shortenMail(currentUser.email)}
+          <FaCircleUser  size={37} color="#3B82F6"/>
+          {/* {shortenMail(currentUser.email)} */}
         </button>
       ) : (
         <Link to="/login">
@@ -40,13 +59,23 @@ const Login = () => {
         </Link>
       )}
       {dropdownVisible && userLoggedIn && (
-        <div className="absolute right-0 mt-2 bg-white border rounded-lg shadow-lg w-48">
+        <div className="absolute right-0 w-48 mt-2 bg-white border rounded-lg shadow-lg">
           <button
             onClick={handleLogout}
             className="block w-full px-4 py-2 text-left text-gray-700 hover:bg-gray-100"
           >
             Logout
           </button>
+     {
+         
+         (storedIsAdmin || isAdmin) && (<button
+            onClick={()=>{navigate("/admin/dashboard")}}
+            className="block w-full px-4 py-2 text-left text-gray-700 hover:bg-gray-100"
+          >
+            Admin Dashboard
+          </button>)
+}
+          
         </div>
       )}
     </div>

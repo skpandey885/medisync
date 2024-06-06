@@ -10,6 +10,7 @@ import Hospitals from "./Hospitals.js";
 import Login from "./Login.js";
 import Logo from "./Logo";
 
+
 const Navbar = () => {
   const { isAdmin } = useAuth();
   const [isOpen, setIsOpen] = useState(false);
@@ -44,11 +45,11 @@ const Navbar = () => {
         </Link>
         <div className="items-center justify-between hidden w-full md:flex md:w-auto">
           <div className="items-center justify-between md:flex">
-            {storedIsAdmin && (
+            {/* {storedIsAdmin && (
               <div className="ml-4">
                 <AdminDropdown />
               </div>
-            )}
+            )} */}
             <Hospitals />
             <Doctors />
             <AvailabilityDropdown />

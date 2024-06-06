@@ -6,6 +6,8 @@ import { doCreateUserWithEmailAndPassword } from '../../firebase/auth'
 import toast from 'react-hot-toast';
 const Register = () => {
 
+
+    
     const navigate = useNavigate()
 
     const [email, setEmail] = useState('')
@@ -23,10 +25,10 @@ const Register = () => {
             setIsRegistering(true)
             try{
             await doCreateUserWithEmailAndPassword(email, password)
+            toast.success("Registered Successfully.")
             }catch(e){
                 toast.error(e.message)
                 setIsRegistering(false)
-                
                 return;
             }
         }
