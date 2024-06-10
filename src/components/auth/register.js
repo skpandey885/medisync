@@ -4,9 +4,9 @@ import { Navigate, Link, useNavigate } from 'react-router-dom'
 import { useAuth } from '../../contexts/authContext'
 import { doCreateUserWithEmailAndPassword } from '../../firebase/auth'
 import toast from 'react-hot-toast';
+
+
 const Register = () => {
-
-
     
     const navigate = useNavigate()
 
