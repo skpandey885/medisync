@@ -8,7 +8,7 @@ const DoctorsList = ({ doctors }) => {
 
   return (
     <div className="mt-5">
-      <div className="overflow-auto p-5" style={{ maxHeight: "600px" }}>
+      <div className="overflow-auto p-5" style={{ maxHeight: "900px" }}>
         {/* Checked In Doctors */}
         <div>
           <h2 className="text-lg font-semibold mb-3">Checked In Doctors</h2>
