@@ -23,6 +23,7 @@ import HealthcareConferences from "./pages/others/HealthcareConferences";
 import HealthcareInitiatives from "./pages/others/HealthcareInitiatives";
 import NotAuthorized from "./utils/NotAuthorized";
 import ProtectedRoute from "./utils/ProtectedRoute";
+import DiseasePrediction from "./pages/others/DiseasePrediction";
 const root = ReactDOM.createRoot(document.getElementById("root"));
 const client = createClient({
   autoConnect: true,
@@ -44,7 +45,7 @@ root.render(
             <Route path="/browse/hospitals" element={<BrowseHospitals />} />
             <Route path="/login" element={<Login />} />
             <Route path="/register" element={<Register />} />
-
+          <Route path="/others/healthcare/disease-prediction" element={<DiseasePrediction/>}/>
             <Route path="/browse/doctors" element={<FIP />} />
             <Route path="/availability/medicine-inventory" element={<FIP />} />
 
