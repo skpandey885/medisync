@@ -1,10 +1,14 @@
-import { collection, getDocs, query, where } from 'firebase/firestore';
-import React, { useEffect, useState } from 'react';
-import { Link } from 'react-router-dom';
-import { db } from '../firebase/firebase';
+import { collection, getDocs, query, where } from "firebase/firestore";
+import React, { useEffect, useState } from "react";
+import { Link } from "react-router-dom";
+import { db } from "../firebase/firebase";
 
 const HospitalCard = ({ hospital }) => {
   const [serviceNames, setServiceNames] = useState("");
+  // console.log("HOSTPIAL INFO ");
+  // console.log(hospital?.id);
+
+  const [hospitalWithServices, setHospitalWithServices] = useState({});
 
   useEffect(() => {
     const fetchServiceNames = async () => {
@@ -27,6 +31,7 @@ const HospitalCard = ({ hospital }) => {
 
         const serviceNamesString = serviceNamesData.join(", ");
         setServiceNames(serviceNamesString);
+        setHospitalWithServices({ ...hospital, serviceNamesString });
       } catch (error) {
         console.error("Error fetching service names:", error);
         setServiceNames("Error fetching services");
@@ -38,7 +43,7 @@ const HospitalCard = ({ hospital }) => {
 
   return (
     <div>
-      <Link state={hospital} to={`/browse/verify/${hospital?._id}`}>
+      <Link state={hospitalWithServices} to={`/view/hospital/${hospital?.id}`}>
         <div className="p-5 ml-[40px] my-[10px] w-[400px] bg-white rounded-lg border shadow-md sm:p-8">
           <div className="flex items-baseline text-gray-900">
             <span className="text-3xl font-extrabold tracking-tight">
@@ -48,32 +53,42 @@ const HospitalCard = ({ hospital }) => {
           <ul role="list" className="space-y-5 my-7">
             <li className="flex space-x-3">
               <span className="text-xl font-bold leading-tight text-blue">
-                Address: <span className="text-lg font-normal">{hospital?.address}</span>
+                Address:{" "}
+                <span className="text-lg font-normal">{hospital?.address}</span>
               </span>
             </li>
             <li className="flex space-x-3">
               <span className="text-xl font-bold leading-tight text-blue">
-                Contact: <span className="text-lg font-normal">{hospital?.contact}</span>
+                Contact:{" "}
+                <span className="text-lg font-normal">{hospital?.contact}</span>
+              </span>
+            </li>
+            {hospital?.doctors && (
+              <li className="flex space-x-3">
+                <span className="text-xl font-bold leading-tight text-blue">
+                  Doctors:{" "}
+                </span>
+                <span className="text-lg font-normal">
+                  {hospital.doctors.length}
+                </span>
+              </li>
+            )}
+            <li className="flex space-x-3">
+              <span className="text-xl font-bold leading-tight text-blue">
+                Beds:{" "}
+                <span className="text-lg font-normal">{hospital?.beds}</span>
               </span>
             </li>
             <li className="flex space-x-3">
               <span className="text-xl font-bold leading-tight text-blue">
-                Doctors: <span className="text-lg font-normal">{hospital?.doctors}</span>
+                Nurses:{" "}
+                <span className="text-lg font-normal">{hospital?.nurses}</span>
               </span>
             </li>
             <li className="flex space-x-3">
               <span className="text-xl font-bold leading-tight text-blue">
-                Beds: <span className="text-lg font-normal">{hospital?.beds}</span>
-              </span>
-            </li>
-            <li className="flex space-x-3">
-              <span className="text-xl font-bold leading-tight text-blue">
-                Nurses: <span className="text-lg font-normal">{hospital?.nurses}</span>
-              </span>
-            </li>
-            <li className="flex space-x-3">
-              <span className="text-xl font-bold leading-tight text-blue">
-                Services: <span className="text-lg font-normal">{serviceNames}</span>
+                Services:{" "}
+                <span className="text-lg font-normal">{serviceNames}</span>
               </span>
             </li>
           </ul>
