@@ -23,6 +23,7 @@ import HealthcareConferences from "./pages/others/HealthcareConferences";
 import HealthcareInitiatives from "./pages/others/HealthcareInitiatives";
 import NotAuthorized from "./utils/NotAuthorized";
 import ProtectedRoute from "./utils/ProtectedRoute";
+import HospitalInformation from "./components/HospitalInformation";
 const root = ReactDOM.createRoot(document.getElementById("root"));
 const client = createClient({
   autoConnect: true,
@@ -42,6 +43,11 @@ root.render(
               element={<BrowseServices />}
             />
             <Route path="/browse/hospitals" element={<BrowseHospitals />} />
+            <Route
+              path="/view/hospital/:id"
+              element={<HospitalInformation />}
+            ></Route>
+
             <Route path="/login" element={<Login />} />
             <Route path="/register" element={<Register />} />
 
