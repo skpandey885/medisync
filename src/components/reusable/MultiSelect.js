@@ -147,11 +147,12 @@ const MultiSelect = () => {
     'yellow_crust_ooze',
 ];
 
-
-
 const [disease, setDisease] = useState('');
 const [buttonText, setButtonText] = useState("Get Predictions")
 
+function getRandomMilliseconds(min, max) {
+  return Math.floor(Math.random() * (max - min + 1)) + min;
+}
 const handleButton = async (e) => {
 console.log(selected)
     if(!selected.length){
@@ -159,8 +160,15 @@ console.log(selected)
         return;
     }
     
-setButtonText("Fetching the data...")
-const url = "http://127.0.0.1:8000";
+setButtonText("Fetching the server...")
+
+setTimeout(() => {
+  setButtonText("Predicting the disease...")
+}, 1000);
+
+setTimeout(async () => {
+  
+const url = "https://disease-prediction-model-mnss.onrender.com";
 
 console.log(`${url}/api/v1/predict`);
 
@@ -189,6 +197,9 @@ console.log(`${url}/api/v1/predict`);
         // Handle errors here
         console.error('Error:', error);
     }
+}, getRandomMilliseconds(2000, 4000));
+
+
 };
 
 useEffect(() => {
