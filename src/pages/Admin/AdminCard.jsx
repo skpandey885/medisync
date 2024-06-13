@@ -1,8 +1,11 @@
 import React, { useState } from "react";
+import { Link } from "react-router-dom"; // Import Link from react-router-dom
 
 const AdminCard = ({ imageSrc, title, description, buttonText, onClick }) => {
   const [adminAddress, setAdminAddress] = useState(""); // State to store the admin address
   const [isAddingAdmin, setIsAddingAdmin] = useState(false); // State to track if admin adding is active
+
+  const isAdmin = title === "Add New Admin"; // Check if the title is "Add New Admin"
 
   return (
     <div className="max-w-sm bg-white border border-gray-200 rounded-lg shadow">
@@ -16,29 +19,57 @@ const AdminCard = ({ imageSrc, title, description, buttonText, onClick }) => {
           {title}
         </h5>
         <p className="mb-3 text-gray-700">{description}</p>
-        <button
-          className="inline-flex items-center px-3 py-2 text-sm font-medium text-white bg-blue-700 rounded-lg hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300"
-          onClick={() => setIsAddingAdmin(true)} // Set isAddingAdmin to true on click
-        >
-          {buttonText}
-          <svg
-            className="w-4 h-4 ms-2 transform rotate-180"
-            aria-hidden="true"
-            xmlns="http://www.w3.org/2000/svg"
-            fill="none"
-            viewBox="0 0 14 10"
+        {isAdmin ? (
+          <button
+            className="inline-flex items-center px-3 py-2 text-sm font-medium text-white bg-blue-700 rounded-lg hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300"
+            onClick={() => setIsAddingAdmin(true)} // Set isAddingAdmin to true on click
           >
-            <path
-              stroke="currentColor"
-              strokeLinecap="round"
-              strokeLinejoin="round"
-              strokeWidth="2"
-              d="M1 5h12m0 0L9 1m4 4L9 9"
-            />
-          </svg>
-        </button>
+            {buttonText}
+            <svg
+              className="w-4 h-4 ms-2 ml-2" // Remove transform rotate-180 class
+              aria-hidden="true"
+              xmlns="http://www.w3.org/2000/svg"
+              fill="none"
+              viewBox="0 0 14 10"
+            >
+              <path
+                stroke="currentColor"
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                strokeWidth="2"
+                d="M13 5H1M13 5l-4-4m4 4l-4 4"
+              />
+            </svg>
+          </button>
+        ) : (
+          <Link
+            to={
+              title === "Send Medicines To Hospital"
+                ? "/admin/send-medicines"
+                : "/admin/update-stock"
+            }
+            className="inline-flex items-center px-3 py-2 text-sm font-medium text-white bg-blue-700 rounded-lg hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300"
+          >
+            {buttonText}
+            <svg
+              className="w-4 h-4 ms-2 ml-2" // Remove transform rotate-180 class
+              aria-hidden="true"
+              xmlns="http://www.w3.org/2000/svg"
+              fill="none"
+              viewBox="0 0 14 10"
+            >
+              <path
+                stroke="currentColor"
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                strokeWidth="2"
+                d="M13 5H1M13 5l-4-4m4 4l-4 4"
+              />
+            </svg>
+          </Link>
+        )}
         {/* Render admin input textbox conditionally with CSS transition */}
-        {isAddingAdmin && (
+        {isAddingAdmin && isAdmin && (
           <div className="mt-4 transition-opacity duration-500 opacity-100">
             <input
               type="text"

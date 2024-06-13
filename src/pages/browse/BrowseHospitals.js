@@ -41,7 +41,7 @@ function BrowseHospitals() {
         />
       </div>
 
-      <div className="flex flex-wrap gap-4">
+      <div className="flex flex-wrap gap-4 mb-10">
         {filteredHospitals.map((hospital) => (
           <HospitalCard
             key={hospital.id}

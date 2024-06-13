@@ -25,6 +25,10 @@ import NotAuthorized from "./utils/NotAuthorized";
 import ProtectedRoute from "./utils/ProtectedRoute";
 import HospitalInformation from "./components/HospitalInformation";
 import DiseasePrediction from "./pages/others/DiseasePrediction";
+import SendMedicine from "./pages/Admin/SendMedicine";
+import UpdateMedicineData from "./pages/Admin/UpdateMedicineData";
+import { WalletProvider } from "./components/layout/WalletContext";
+import MainScreen from "./pages/Admin/SendMedicineComponents/MainScreen";
 const root = ReactDOM.createRoot(document.getElementById("root"));
 const client = createClient({
   autoConnect: true,
@@ -32,55 +36,76 @@ const client = createClient({
 
 root.render(
   <>
-    <WagmiConfig client={client}>
-      <AuthProvider>
-        <BrowserRouter>
-          <Toaster />
-          <Navbar />
-          <Routes>
-            <Route path="/" element={<App />} />
-            <Route
-              path="/availability/services-tracking"
-              element={<BrowseServices />}
-            />
-            <Route path="/browse/hospitals" element={<BrowseHospitals />} />
-            <Route
-              path="/view/hospital/:id"
-              element={<HospitalInformation />}
-            ></Route>
+    <WalletProvider>
+      <WagmiConfig client={client}>
+        <AuthProvider>
+          <BrowserRouter>
+            <Toaster />
+            <Navbar />
+            <Routes>
+              <Route path="/" element={<App />} />
+              <Route
+                path="/availability/services-tracking"
+                element={<BrowseServices />}
+              />
+              <Route path="/browse/hospitals" element={<BrowseHospitals />} />
+              <Route
+                path="/view/hospital/:id"
+                element={<HospitalInformation />}
+              ></Route>
 
-            <Route path="/login" element={<Login />} />
-            <Route path="/register" element={<Register />} />
-          <Route path="/others/healthcare/disease-prediction" element={<DiseasePrediction/>}/>
-            <Route path="/browse/doctors" element={<FIP />} />
-            <Route path="/availability/medicine-inventory" element={<FIP />} />
+              <Route path="/login" element={<Login />} />
+              <Route path="/register" element={<Register />} />
+              <Route
+                path="/others/healthcare/disease-prediction"
+                element={<DiseasePrediction />}
+              />
+              <Route path="/browse/doctors" element={<FIP />} />
+              <Route
+                path="/availability/medicine-inventory"
+                element={<FIP />}
+              />
 
-            <Route
-              path="/others/healthcare/initiatives"
-              element={<HealthcareInitiatives />}
-            />
-            <Route
-              path="/others/healthcare/conferences"
-              element={<HealthcareConferences />}
-            />
+              <Route
+                path="/others/healthcare/initiatives"
+                element={<HealthcareInitiatives />}
+              />
+              <Route
+                path="/others/healthcare/conferences"
+                element={<HealthcareConferences />}
+              />
 
-            <Route path="/not-authorized" element={<NotAuthorized />} />
+              <Route path="/not-authorized" element={<NotAuthorized />} />
 
-            <Route element={<ProtectedRoute />}>
-              <Route path="/admin/utils" element={<Utilitytest />} />
-              <Route path="/admin/dashboard" element={<Dashboard />} />
-            </Route>
+              <Route element={<ProtectedRoute />}>
+                <Route path="/admin/utils" element={<Utilitytest />} />
+                <Route path="/admin/dashboard" element={<Dashboard />} />
+                <Route
+                  path="/admin/send-medicines"
+                  element={<SendMedicine />}
+                />
+                <Route
+                  path="/admin/update-stock"
+                  element={<UpdateMedicineData />}
+                />
 
-            <Route path="/Terms" element={<Terms />} />
+                <Route
+                  path="/admin/send-medicines/:id"
+                  element={<MainScreen />}
+                />
+              </Route>
 
-            <Route path="/Contact" element={<Contact />} />
+              <Route path="/Terms" element={<Terms />} />
 
-            <Route path="/About" element={<About />} />
-            {/* Pending : Individual pages to display single student or college */}
-          </Routes>
-          <Footer />
-        </BrowserRouter>
-      </AuthProvider>
-    </WagmiConfig>
+              <Route path="/Contact" element={<Contact />} />
+
+              <Route path="/About" element={<About />} />
+              {/* Pending : Individual pages to display single student or college */}
+            </Routes>
+            <Footer />
+          </BrowserRouter>
+        </AuthProvider>
+      </WagmiConfig>
+    </WalletProvider>
   </>
 );
