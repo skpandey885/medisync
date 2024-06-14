@@ -1,39 +1,28 @@
-import React, { useState, useEffect } from "react";
+import React from "react";
 
 const MedicineCard = ({
   medicine,
   onCounterChange,
   removeFromStockToBeSent,
 }) => {
-  const [counter, setCounter] = useState(0);
-
-  useEffect(() => {
-    setCounter(medicine.counter);
-  }, [medicine.counter]);
-
-  const incrementCounter = () => {
-    const newCounter = counter + 10;
-    setCounter(newCounter);
-    onCounterChange(medicine.id, newCounter);
+  const handleIncrement = () => {
+    onCounterChange(medicine.id, medicine.counter + 10);
   };
 
-  const decrementCounter = () => {
-    if (counter >= 10) {
-      const newCounter = counter - 10;
-      setCounter(newCounter);
-      onCounterChange(medicine.id, newCounter);
+  const handleDecrement = () => {
+    if (medicine.counter >= 10) {
+      onCounterChange(medicine.id, medicine.counter - 10);
     }
   };
 
-  const handleCounterChange = (event) => {
+  const handleChange = (event) => {
     const value = parseInt(event.target.value);
     if (!isNaN(value)) {
-      setCounter(value);
       onCounterChange(medicine.id, value);
     }
   };
 
-  const handleRemoveFromStockToBeSent = () => {
+  const handleRemove = () => {
     removeFromStockToBeSent(medicine.id);
   };
 
@@ -55,27 +44,24 @@ const MedicineCard = ({
           <div className="flex items-center space-x-2">
             <button
               className="px-2 py-1 bg-gray-200 rounded-md"
-              onClick={decrementCounter}
+              onClick={handleDecrement}
             >
               -
             </button>
             <input
               type="text"
-              value={counter}
-              onChange={handleCounterChange}
+              value={medicine.counter}
+              onChange={handleChange}
               className="px-2 py-1 border border-gray-300 rounded-md w-16 text-center"
             />
             <button
               className="px-2 py-1 bg-gray-200 rounded-md"
-              onClick={incrementCounter}
+              onClick={handleIncrement}
             >
               +
             </button>
             {medicine.counter > 0 && (
-              <button
-                className="px-2 py-1 text-red-600"
-                onClick={handleRemoveFromStockToBeSent}
-              >
+              <button className="px-2 py-1 text-red-600" onClick={handleRemove}>
                 Remove
               </button>
             )}

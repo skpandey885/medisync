@@ -28,7 +28,7 @@ import DiseasePrediction from "./pages/others/DiseasePrediction";
 import SendMedicine from "./pages/Admin/SendMedicine";
 import UpdateMedicineData from "./pages/Admin/UpdateMedicineData";
 import { WalletProvider } from "./components/layout/WalletContext";
-import MainScreen from "./pages/Admin/SendMedicineComponents/MainScreen";
+import MainScreen from "./pages/Admin/SendMedicineComponents/MainScreenSendMedicine";
 const root = ReactDOM.createRoot(document.getElementById("root"));
 const client = createClient({
   autoConnect: true,
@@ -91,6 +91,11 @@ root.render(
 
                 <Route
                   path="/admin/send-medicines/:id"
+                  element={<MainScreen />}
+                />
+
+                <Route
+                  path="/admin/update-medicines/:id"
                   element={<MainScreen />}
                 />
               </Route>

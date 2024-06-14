@@ -61,12 +61,20 @@ const MedicinePanel = ({ onUpdateMedicines, handleStockUpdate, openModal }) => {
 
   // Handle counter change from MedicineCard
   const handleCounterChange = (medicineId, counterValue) => {
-    const updatedMedicines = filteredMedicines.map((medicine) =>
+    const updatedFilteredMedicines = filteredMedicines.map((medicine) =>
       medicine.id === medicineId
         ? { ...medicine, counter: counterValue }
         : medicine
     );
-    setFilteredMedicines(updatedMedicines);
+    setFilteredMedicines(updatedFilteredMedicines);
+
+    const updatedMedicines = medicines.map((medicine) =>
+      medicine.id === medicineId
+        ? { ...medicine, counter: counterValue }
+        : medicine
+    );
+    setMedicines(updatedMedicines);
+
     onUpdateMedicines(updatedMedicines); // Notify MainScreen of updated medicines
   };
 
@@ -93,19 +101,35 @@ const MedicinePanel = ({ onUpdateMedicines, handleStockUpdate, openModal }) => {
 
   // Function to handle sending medicines to hospital
   const sendMedicinesToHospital = () => {
-    // Check if stockToBeSent has items
-    if (stockToBeSent.length === 0) {
+    // Check if filteredMedicines has items with counters greater than 0
+    const stockToSend = filteredMedicines.filter(
+      (medicine) => medicine.counter > 0
+    );
+
+    // Check if stockToSend has items
+    if (stockToSend.length === 0) {
       toast.error("Please select at least one medicine to send.");
       return;
     }
 
     // Logic to send medicines to hospital
     console.log("Sending medicines to hospital...");
-    handleStockUpdate(stockToBeSent); // Notify MainScreen of medicines to be sent
+    handleStockUpdate(stockToSend); // Notify MainScreen of medicines to be sent
     openModal(); // Open modal in MainScreen
 
-    // Reset stockToBeSent list
-    setStockToBeSent([]);
+    // Reset counters in filteredMedicines
+    const updatedFilteredMedicines = filteredMedicines.map((medicine) => ({
+      ...medicine,
+      counter: 0,
+    }));
+    setFilteredMedicines(updatedFilteredMedicines);
+
+    // Reset counters in medicines
+    const updatedMedicines = medicines.map((medicine) => ({
+      ...medicine,
+      counter: 0,
+    }));
+    setMedicines(updatedMedicines);
   };
 
   return (

@@ -3,19 +3,24 @@ import { useWallet } from "../../components/layout/WalletContext"; // Adjust the
 import { db } from "../../firebase/firebase"; // Ensure the path is correct
 import { doc, getDoc } from "firebase/firestore";
 import { useNavigate } from "react-router-dom"; // Import useNavigate instead of useHistory
+import MetamaskConnectModal from "../../components/reusable/ConnectWalletModal"; // Ensure the path is correct
 
 const SendMedicine = () => {
   const navigate = useNavigate(); // useNavigate hook for navigation
-  const { contract } = useWallet();
+  const { contract, handleConnectWallet, accountAddress } = useWallet();
   const [hospitals, setHospitals] = useState([]);
   const [searchTerm, setSearchTerm] = useState("");
   const [selectedHospital, setSelectedHospital] = useState("");
   const [showDropdown, setShowDropdown] = useState(false);
+  const [showModal, setShowModal] = useState(false);
 
   useEffect(() => {
     const fetchHospitalData = async () => {
       try {
-        if (!contract) return;
+        if (!contract || !accountAddress) {
+          setShowModal(true); // Show modal if wallet is not connected
+          return;
+        }
 
         // Fetch hospital data from the smart contract
         const [hospitalIds, hospitalNames] = await contract.getHospitalsData();
@@ -39,7 +44,7 @@ const SendMedicine = () => {
     };
 
     fetchHospitalData();
-  }, [contract]);
+  }, [contract, accountAddress]);
 
   const handleSearchFocus = () => {
     if (searchTerm.trim() === "") {
@@ -152,6 +157,11 @@ const SendMedicine = () => {
           </button>
         </form>
       </div>
+      <MetamaskConnectModal
+        isOpen={showModal}
+        closeModal={() => setShowModal(false)}
+        connectWallet={handleConnectWallet}
+      />
     </div>
   );
 };
