@@ -69,7 +69,7 @@ const SelectedMedicinesModal = ({
                       {medicine.name}
                     </td>
                     <td className="px-3 py-2 whitespace-nowrap">
-                      {medicine.counter}
+                      {medicine.quantity}
                     </td>
                     {/* Render additional columns here */}
                   </tr>
