@@ -51,7 +51,7 @@ const Navbar = () => {
               </div>
             )} */}
             <Hospitals />
-            <Doctors />
+            {/* <Doctors /> */}
             <AvailabilityDropdown />
             <AwareDropdown />
             <Login />

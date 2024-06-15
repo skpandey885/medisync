@@ -107,12 +107,12 @@ const UpdateMedicinePanel = ({ onUpdateMedicines, openModal }) => {
     <div className="p-4 rounded shadow-sm h-[600px] overflow-y-auto relative">
       <button
         onClick={handleSendChanges}
-        className="absolute top-4 right-4 bg-blue-500 text-white px-4 py-2 rounded-md hover:bg-blue-600 focus:outline-none"
+        className="absolute px-4 py-2 text-white bg-blue-500 rounded-md top-4 right-4 hover:bg-blue-600 focus:outline-none"
       >
         Send Changes
       </button>
-      <h2 className="text-2xl font-bold mb-4">Update Medicine Stock</h2>
-      <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+      <h2 className="mb-4 text-2xl font-bold">Update Medicine Stock</h2>
+      <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
         {medicines.length > 0 ? (
           medicines.map((medicine) => (
             <UpdateMedicineCard

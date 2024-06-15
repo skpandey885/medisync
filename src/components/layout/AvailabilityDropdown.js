@@ -24,19 +24,26 @@ export default function AvailabilityDropdown() {
           leaveFrom="transform opacity-100 scale-100"
           leaveTo="transform opacity-0 scale-95"
         >
-          <Menu.Items className="absolute right-0 z-50 w-40 mt-2 origin-top-left bg-white rounded shadow-lg ring-1 ring-gray-200">
+          <Menu.Items className="absolute right-0 z-50 mt-2 origin-top-left bg-white rounded shadow-lg w-60 ring-1 ring-gray-200">
             <div className="flex flex-col p-1 i">
-              <Menu.Item>
+              {/* <Menu.Item>
                   <Link className='px-4 py-2 duration-100 rounded hover:bg-gray-100' to='/availability/medicine-inventory'>
                     Medicines
                   </Link>
 
-              </Menu.Item>
+              </Menu.Item> */}
               <Menu.Item>
               <Link className='px-4 py-2 duration-100 rounded hover:bg-gray-100' to='/availability/services-tracking'>
               Services
                   </Link>
               </Menu.Item>
+
+              <Menu.Item>
+              <Link className='px-4 py-2 duration-100 rounded hover:bg-gray-100' to='/others/healthcare/disease-prediction'>
+               Disease Prediction 
+                  </Link>
+              </Menu.Item>
+              
             </div>
           </Menu.Items>
         </Transition>

@@ -38,12 +38,7 @@ Aware
                   </Link>
               </Menu.Item>
 
-              <Menu.Item>
-              <Link className='px-4 py-2 duration-100 rounded hover:bg-gray-100' to='/others/healthcare/disease-prediction'>
-               Disease Prediction 
-                  </Link>
-              </Menu.Item>
-              
+             
             
             </div>
           </Menu.Items>

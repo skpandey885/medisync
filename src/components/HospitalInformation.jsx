@@ -1,7 +1,12 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useLocation } from "react-router-dom";
 import HospitalImage from "../assets/hospital.png";
 import DoctorsList from "./Doctor/DoctorsList";
+import MedicineCard from "./reusable/MedicineCard";
+import { useWallet } from "./layout/WalletContext";
+import { db } from "../firebase/firebase";
+
+import { doc, getDoc } from "firebase/firestore";
 
 const HospitalInformation = () => {
   const location = useLocation();
@@ -9,6 +14,69 @@ const HospitalInformation = () => {
   const serviceNames = location?.state.serviceNamesString; // Access serviceNames from hospital object
 
   const [view, setView] = useState("default"); // State to manage the view
+  const [searchTerm, setSearchTerm] = useState("");
+
+  const [medicines, setMedicines] = useState([]);
+
+  const filteredMedicines = medicines.filter(
+    (medicine) =>
+      medicine.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
+      medicine.description.toLowerCase().includes(searchTerm.toLowerCase())
+  );
+
+  const { isBlockchainAdmin, contract, handleConnectWallet, accountAddress } =
+    useWallet();
+
+  useEffect(() => {
+    fetchMedicines();
+  }, [hospital]);
+
+  const fetchMedicines = async () => {
+    try {
+      if (!contract || !hospital) {
+        console.error("Contract or hospital not available.");
+        return;
+      }
+
+      // Call the smart contract function to get medicine IDs, names, and quantities
+      const res = await contract.getMedicinesAtHospital(hospital.id);
+
+      const medicineIds = res[0];
+      const quantities = res[2];
+
+      // Fetch medicine details from Firebase based on the returned IDs
+      const medicineDetails = await Promise.all(
+        medicineIds.map(async (id, index) => {
+          const docRef = doc(db, "medicines", id.toString());
+          const docSnap = await getDoc(docRef);
+          if (docSnap.exists()) {
+            return {
+              id: id.toString(),
+              name: docSnap.data().name, // Include name in medicine details
+              ...docSnap.data(),
+              quantity: quantities[index].toNumber(),
+            };
+          } else {
+            console.warn(`Medicine with ID ${id} not found in Firebase.`);
+            return null;
+          }
+        })
+      );
+
+      // Filter out any null values (medicines not found in Firebase)
+      const validMedicines = medicineDetails.filter(
+        (medicine) => medicine !== null
+      );
+
+      console.log(validMedicines);
+      setMedicines(validMedicines);
+
+      // Log the medicines with quantities to the console
+      console.log("Fetched medicines for hospital:", validMedicines);
+    } catch (error) {
+      console.error("Error fetching medicines:", error);
+    }
+  };
 
   const handleViewDoctors = () => setView("doctors");
   const handleViewMedicines = () => setView("medicines");
@@ -67,13 +135,13 @@ const HospitalInformation = () => {
         <div className="mt-8">
           <button
             onClick={handleViewDoctors}
-            className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded mr-4"
+            className="px-4 py-2 mr-4 font-bold text-white bg-blue-500 rounded hover:bg-blue-700"
           >
             View Doctors
           </button>
           <button
             onClick={handleViewMedicines}
-            className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded mt-5"
+            className="px-4 py-2 mt-5 font-bold text-white bg-blue-500 rounded hover:bg-blue-700"
           >
             View Medicines
           </button>
@@ -96,10 +164,28 @@ const HospitalInformation = () => {
         )}
 
         {view === "medicines" && (
-          <div className="transition-opacity duration-500">
-            <h2>Medicines List</h2>
-            <p>Aspirin</p>
-            <p>Ibuprofen</p>
+          <div className="w-[70vw]">
+            <input
+              type="text"
+              placeholder="Search by name"
+              value={searchTerm}
+              onChange={(e) => setSearchTerm(e.target.value)}
+              className="p-2 mb-4 border "
+            />
+
+            <div className="overflow-y-auto h-[90vh]">
+              <div className="flex flex-wrap transition-opacity duration-500 ">
+                {filteredMedicines.map((medicine, index) => (
+                  <MedicineCard
+                    key={index}
+                    name={medicine.name}
+                    description={medicine.description}
+                    quantity={medicine.quantity}
+                    brands={medicine.brands}
+                  />
+                ))}
+              </div>
+            </div>
           </div>
         )}
       </div>
