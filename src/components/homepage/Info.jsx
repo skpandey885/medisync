@@ -50,11 +50,11 @@ const Info = () => {
               <GiMagnifyingGlass size={40} />
             </div>
             <h4 className="text-xl font-medium text-center text-gray-700">
-              Transparent Billing System
+              Disease Predciton
             </h4>
             <p className="text-base text-center text-gray-500">
-              Implements a transparent billing system to provide clarity and
-              accountability in healthcare expenses.
+              Implements a Machine Learning based disease prediction system with
+              symptoms as input
             </p>
           </div>
 
