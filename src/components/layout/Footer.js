@@ -47,7 +47,10 @@ const Footer = () => {
               <span className="sr-only">Twitter</span>
               <BsTwitter size={30} />
             </a> */}
-            <a href="#" className="text-gray-400 hover:text-gray-500">
+            <a
+              href="https://github.com/skpandey885/medisync"
+              className="text-gray-400 hover:text-gray-500"
+            >
               <span className="sr-only">GitHub</span>
               <BsGithub size={30} />
             </a>
